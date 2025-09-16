@@ -11,7 +11,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   backend:
-    image: <your-dockerhub-username>/docker-backend:latest
+    image: suryakiran1993/docker-backend:latest
     container_name: springboot
     ports:
       - "2025:2000"
@@ -20,7 +20,7 @@ services:
     restart: on-failure
 
   frontend:
-    image: <your-dockerhub-username>/docker-frontend:latest
+    image: suryakiran1993/docker-frontend:latest
     container_name: react
     ports:
       - "3000:80"
