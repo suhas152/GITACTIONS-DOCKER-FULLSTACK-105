@@ -9,6 +9,11 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -pdocker"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
 
   backend:
     image: suryakiran1993/docker-backend:latest
@@ -16,7 +21,8 @@ services:
     ports:
       - "2025:2000"
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
     restart: on-failure
 
   frontend:
